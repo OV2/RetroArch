@@ -1,1 +1,38 @@
-1 ICON DISCARDABLE "retroarch-icon.ico"
+#include "resource.h"
+1                       ICON                    "retroarch-icon.ico"
+
+IDR_MENU MENU
+BEGIN
+    POPUP "Emulation"
+    BEGIN
+        MENUITEM "Toggle Pause",                                ID_M_TOGGLEPAUSE
+        MENUITEM "Toggle Fast Forward",                         ID_M_TOGGLEFF
+        MENUITEM "Frame Advance",                               ID_M_FRAMEADVANCE
+        MENUITEM SEPARATOR
+        MENUITEM "Reset",                                       ID_M_RESET
+        MENUITEM "Quit",                                        ID_M_QUIT
+    END
+    POPUP "State"
+    BEGIN
+        MENUITEM "Slot +",                                      ID_M_INCSTATE
+        MENUITEM "Slot -",                                      ID_M_DECSTATE
+        MENUITEM SEPARATOR
+        MENUITEM "Load",                                        ID_M_LOADSTATE
+        MENUITEM "Save",                                        ID_M_SAVESTATE
+    END
+    POPUP "Video"
+    BEGIN
+        MENUITEM "Toggle Fullscreen",                           ID_M_TOGGLEFS
+        MENUITEM "Take Screenshot",                             ID_M_SCREENSHOT
+        POPUP "Shader"
+        BEGIN
+            MENUITEM "Next Shader",                             ID_M_NEXTSHADER
+            MENUITEM "Previous Shader",                         ID_M_PREVSHADER
+            MENUITEM "Select Shader",                           ID_M_SELECTSHADER
+        END
+    END
+    POPUP "Audio"
+    BEGIN
+        MENUITEM "Mute",                                        ID_M_TOGGLEMUTE
+    END
+END

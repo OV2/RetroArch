@@ -102,9 +102,6 @@
     <ClCompile Include="..\..\audio\dsound.c">
       <Filter>Source Files\audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\audio\ext_audio.c">
-      <Filter>Source Files\audio</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\audio\null.c">
       <Filter>Source Files\audio</Filter>
     </ClCompile>
@@ -113,12 +110,6 @@
     </ClCompile>
     <ClCompile Include="..\..\audio\xaudio.c">
       <Filter>Source Files\audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\gfx\context\wgl_ctx.c">
-      <Filter>Source Files\gfx\context</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\gfx\ext_gfx.c">
-      <Filter>Source Files\gfx</Filter>
     </ClCompile>
     <ClCompile Include="..\..\gfx\gfx_common.c">
       <Filter>Source Files\gfx</Filter>
@@ -198,9 +189,15 @@
     <ClCompile Include="..\..\gfx\fonts\fonts.c">
       <Filter>Source Files\gfx\fonts</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\gfx\context\wgl_threaded_ctx.c">
+      <Filter>Source Files\gfx\context</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\media\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -208,5 +205,10 @@
     <ResourceCompile Include="..\..\media\rarch.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\media\retroarch-icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -165,8 +165,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\audio\dsound.c">
     </ClCompile>
-    <ClCompile Include="..\..\audio\ext_audio.c">
-    </ClCompile>
     <ClCompile Include="..\..\audio\null.c">
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)\nullaudio.obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)\nullaudio.obj</ObjectFileName>
@@ -182,6 +180,7 @@
     </ClCompile>
     <ClCompile Include="..\..\autosave.c">
     </ClCompile>
+    <ClCompile Include="..\..\gfx\context\wgl_threaded_ctx.c" />
     <ClCompile Include="..\..\gfx\d3d9\d3d9.cpp" />
     <ClCompile Include="..\..\gfx\d3d9\render_chain.cpp" />
     <ClCompile Include="..\..\gfx\fonts\bitmapfont.c" />
@@ -206,10 +205,6 @@
     <ClCompile Include="..\..\file.c">
     </ClCompile>
     <ClCompile Include="..\..\file_path.c">
-    </ClCompile>
-    <ClCompile Include="..\..\gfx\context\wgl_ctx.c">
-    </ClCompile>
-    <ClCompile Include="..\..\gfx\ext_gfx.c">
     </ClCompile>
     <ClCompile Include="..\..\gfx\gfx_common.c">
     </ClCompile>
@@ -267,10 +262,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\media\resource.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\media\rarch.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\media\retroarch-icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

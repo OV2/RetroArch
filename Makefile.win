@@ -103,7 +103,13 @@ ifeq ($(HAVE_THREADS), 1)
 endif
 
 ifeq ($(HAVE_OPENGL), 1)
-   OBJ += gfx/gl.o gfx/math/matrix.o gfx/fonts/gl_font.o gfx/fonts/gl_raster_font.o gfx/gfx_context.o gfx/context/wgl_ctx.o
+   OBJ += gfx/gl.o gfx/math/matrix.o gfx/fonts/gl_font.o gfx/fonts/gl_raster_font.o gfx/gfx_context.o
+   ifeq ($(HAVE_OPENGL_MENU), 1)
+      OBJ += gfx/context/wgl_threaded_ctx.o
+      LIBS += -lcomdlg32
+   else
+      OBJ += gfx/context/wgl_ctx.o
+   endif
    DEFINES += -DHAVE_OPENGL -DHAVE_OVERLAY
    LIBS += -lopengl32 -lgdi32
 endif
@@ -148,7 +154,7 @@ endif
 ifeq ($(HAVE_XML), 1)
    OBJ += gfx/shader_glsl.o cheats.o
    DEFINES += -Ilibxml2 -DHAVE_XML -DHAVE_GLSL
-   LIBS += -lxml2 -liconv
+   LIBS += -lxml2 -liconv -lz
 endif
 
 ifeq ($(HAVE_DYLIB), 1)
