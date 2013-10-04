@@ -28,6 +28,8 @@
 #include <windows.h>
 #include <commdlg.h>
 #include <string.h>
+#include <Shellapi.h>
+#include <Shlwapi.h>
 
 #define IDI_ICON 1
 #define MAX_MONITORS 9
@@ -202,6 +204,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT message,
 
       case WM_CREATE:
          create_gl_context(hwnd);
+         DragAcceptFiles(hwnd, TRUE);
          return 0;
 
       case WM_CLOSE:
@@ -225,6 +228,46 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT message,
             g_resized = true;
          }
          return 0;
+
+      case WM_DROPFILES:
+      {
+         HDROP hdrop;
+         UINT file_count;
+         char dropped_file[PATH_MAX];
+
+         hdrop = (HDROP)wparam;
+         file_count = DragQueryFile(hdrop, 0xFFFFFFFF, NULL, 0);
+         if (file_count == 1)
+         {
+            DragQueryFile(hdrop, 0, dropped_file, PATH_MAX);
+            char *ext = PathFindExtension(dropped_file);
+            if (strcasecmp(ext,".dll") == 0)
+            {
+               struct retro_system_info info = {0};
+               bool load_no_rom;
+               if(libretro_get_system_info(dropped_file, &info, &load_no_rom))
+               {
+                  libretro_free_system_info(&info);
+                  strlcpy(g_settings.libretro, dropped_file, sizeof(g_settings.libretro));
+                  if (load_no_rom)
+                  {
+                     *g_extern.fullpath = '\0';
+                     g_extern.lifecycle_mode_state |= (1ULL << MODE_LOAD_GAME);
+                     PostMessage(g_hwnd, WM_CLOSE, 0, 0);
+                  }
+               }
+            }
+            else
+            {
+               strlcpy(g_extern.fullpath, dropped_file, sizeof(g_extern.fullpath));
+               g_extern.lifecycle_mode_state |= (1ULL << MODE_LOAD_GAME);
+               PostMessage(g_hwnd, WM_CLOSE, 0, 0);
+            }
+         }
+         DragFinish(hdrop);
+
+         return 0;
+       }
    }
 
    return DefWindowProc(hwnd, message, wparam, lparam);
